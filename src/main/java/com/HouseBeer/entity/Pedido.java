@@ -11,8 +11,6 @@ import java.util.Set;
 
 @Table(name = "factura")
 @Entity
-@Data
-@Builder
 public class Pedido {
 
     @Id
@@ -33,6 +31,63 @@ public class Pedido {
     @Column(name = "IMPORTE_TOTAL")
     private BigDecimal importeTotal;
 
+    public Pedido() {}
 
+    public Pedido(Long idPedido, LocalDateTime fechaCreacion, Cliente cliente, BigDecimal importeTotal) {
+        this.idPedido = idPedido;
+        this.fechaCreacion = fechaCreacion;
+        this.cliente = cliente;
+        this.importeTotal = importeTotal;
+    }
 
+    public Long getIdPedido() {
+        return idPedido;
+    }
+
+    public void setIdPedido(Long idPedido) {
+        this.idPedido = idPedido;
+    }
+
+    public LocalDateTime getFechaCreacion() {
+        return fechaCreacion;
+    }
+
+    public void setFechaCreacion(LocalDateTime fechaCreacion) {
+        this.fechaCreacion = fechaCreacion;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public Set<Producto> getProductos() {
+        return productos;
+    }
+
+    public void setProductos(Set<Producto> productos) {
+        this.productos = productos;
+    }
+
+    public BigDecimal getImporteTotal() {
+        return importeTotal;
+    }
+
+    public void setImporteTotal(BigDecimal importeTotal) {
+        this.importeTotal = importeTotal;
+    }
+
+    @Override
+    public String toString() {
+        return "Pedido{" +
+                "idPedido=" + idPedido +
+                ", fechaCreacion=" + fechaCreacion +
+                ", cliente=" + cliente +
+                ", productos=" + productos +
+                ", importeTotal=" + importeTotal +
+                '}';
+    }
 }

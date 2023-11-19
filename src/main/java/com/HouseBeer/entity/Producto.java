@@ -33,4 +33,43 @@ public class Producto {
     @Column(name = "ID_FOTO")
     private Set<Foto> fotos = new HashSet<>();
 
+    public Long getIdProducto() {
+        return idProducto;
+    }
+
+    public void setIdProducto(Long idProducto) {
+        this.idProducto = idProducto;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public Set<Foto> getFotos() {
+        return fotos;
+    }
+
+    public void setFotos(Set<Foto> fotos) {
+        this.fotos = fotos;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public BigDecimal getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(BigDecimal precio) {
+        this.precio = precio;
+    }
 }
