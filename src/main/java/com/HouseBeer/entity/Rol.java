@@ -14,8 +14,33 @@ public class Rol {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idRol;
 
-    @Column(name = "TIPO_DESCRIPCION", unique = true)
+    @Column(name = "TIPO_DESCRIPCION")
     @Enumerated(EnumType.STRING)
     private TipoRol tipoRol;
 
+    public Rol() {}
+
+    public Long getIdRol() {
+        return idRol;
+    }
+
+    public void setIdRol(Long idRol) {
+        this.idRol = idRol;
+    }
+
+    public TipoRol getTipoRol() {
+        return tipoRol;
+    }
+
+    public void setTipoRol(TipoRol tipoRol) {
+        this.tipoRol = tipoRol;
+    }
+
+    @Override
+    public String toString() {
+        return "Rol{" +
+                "idRol=" + idRol +
+                ", tipoRol=" + tipoRol +
+                '}';
+    }
 }
