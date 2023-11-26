@@ -20,6 +20,10 @@ public class Rol {
 
     public Rol() {}
 
+    public Rol(TipoRol tipoRol) {
+        this.tipoRol = tipoRol;
+    }
+
     public Long getIdRol() {
         return idRol;
     }

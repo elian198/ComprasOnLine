@@ -28,8 +28,9 @@ public class ProductoService {
         productoRepository.deleteById(id);
     }
 
-    public void saveFoto(Long id, Foto foto){
+    public void addImage(Long id, List<Foto> foto){
       Optional<Producto>  producto = productoRepository.findById(id);
+      producto.get().getFotos().addAll(foto);
       productoRepository.save(producto.get());
     }
 }

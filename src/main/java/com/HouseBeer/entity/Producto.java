@@ -29,7 +29,7 @@ public class Producto {
     @Column(name = "PRECIO")
     private BigDecimal precio;
 
-    @OneToMany(mappedBy = "idFoto")
+    @OneToMany(mappedBy = "idFoto", cascade = CascadeType.ALL)
     @Column(name = "ID_FOTO")
     private Set<Foto> fotos = new HashSet<>();
 

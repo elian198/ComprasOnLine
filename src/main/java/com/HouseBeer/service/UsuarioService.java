@@ -1,6 +1,8 @@
 package com.HouseBeer.service;
 
+import com.HouseBeer.entity.Rol;
 import com.HouseBeer.entity.Usuario;
+import com.HouseBeer.entity.enums.TipoRol;
 import com.HouseBeer.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,6 +19,7 @@ public class UsuarioService implements UserDetailsService {
     private UsuarioRepository usuarioRepository;
 
    public void saveRol(Usuario usuario){
+       usuario.getRoles().add(new Rol(TipoRol.BASIC));
        usuarioRepository.save(usuario);
    }
 
