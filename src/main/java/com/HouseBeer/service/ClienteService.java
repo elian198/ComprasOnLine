@@ -14,15 +14,31 @@ public class ClienteService {
     @Autowired
     private ClienteRepository clienteRepository;
 
-    public List<Cliente> findAllProductos(){
+    public List<Cliente> findAllCLients(){
         return clienteRepository.findAll();
     }
 
-    public void saveProducto(Cliente cliente){
+    public void saveClient(Cliente cliente){
         clienteRepository.save(cliente);
     }
 
     public void deleteById(Long id){
         clienteRepository.deleteById(id);
+    }
+
+    public Cliente findByEmail(String email){
+        return  clienteRepository.findByEmail(email);
+    }
+
+    public Cliente findByPhone(Integer phone){
+        return clienteRepository.findByPhone(phone);
+    }
+
+    public Cliente findByName(String name){
+        return clienteRepository.findByName(name);
+    }
+
+    public Cliente findByDireccion(String direccion){
+        return  clienteRepository.findByDireccion(direccion);
     }
 }

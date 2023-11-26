@@ -13,9 +13,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @RestController
@@ -56,15 +56,26 @@ public class UsuarioController {
         if(usuarioService.findByEmail(user.getEmail()) != null){
             return ResponseEntity.badRequest().body("El Email ya existe");
         }
-
-
         String password = passwordEncoder.encode(user.getPassword());
         user.setPassword(password);
         usuarioService.saveRol(user);
-
         return ResponseEntity.ok("Usuario creado");
     }
 
+    @GetMapping("/usuario")
+    public ResponseEntity<List<Usuario>> findAllUsuario(){
+        return ResponseEntity.ok(usuarioService.findAll());
+    }
+
+    @PostMapping("/usuario/findByName/{nombre}")
+    public ResponseEntity<Usuario> findByName(@PathVariable String nombre){
+        return ResponseEntity.ok(usuarioService.findByUserName(nombre));
+    }
+
+    @PostMapping("/usuario/findByEmail" )
+    public ResponseEntity<Usuario> findByEmail(@PathVariable String email){
+        return ResponseEntity.ok(usuarioService.findByEmail(email));
+    }
 
 
 }

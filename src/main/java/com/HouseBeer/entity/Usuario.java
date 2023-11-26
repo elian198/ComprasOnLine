@@ -28,7 +28,7 @@ public class Usuario {
     @Column(name = "PASSWORD")
     private String password;
 
-    @OneToMany(mappedBy = "idRol")
+    @OneToMany(mappedBy = "idRol", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @Column(name = "ID_ROL")
     private Set<Rol> roles = new HashSet<>();
 
