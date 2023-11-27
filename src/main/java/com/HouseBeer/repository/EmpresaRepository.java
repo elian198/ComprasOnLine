@@ -15,6 +15,6 @@ public interface EmpresaRepository extends JpaRepository<Empresa, Long> {
     @Query( value = "SELECT * FROM empresa WHERE name = :name", nativeQuery = true)
     public Empresa findByName(@Param("name")String name);
 
-    @Query( value = "SELECT * FROM empresa")
-    public List<Empresa> findByALlSort(Sort sort);
+    @Query( value = "SELECT * FROM empresa ORDER BY nombre", nativeQuery = true)
+    List<Empresa> findAllEmpresa();
 }
