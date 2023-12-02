@@ -29,47 +29,14 @@ public class Producto {
     @Column(name = "PRECIO")
     private BigDecimal precio;
 
-    @OneToMany(mappedBy = "idFoto", cascade = CascadeType.ALL)
-    @Column(name = "ID_FOTO")
+    @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL)
     private Set<Foto> fotos = new HashSet<>();
 
-    public Long getIdProducto() {
-        return idProducto;
-    }
+    @ManyToOne()
+    private Empresa empresa ;
 
-    public void setIdProducto(Long idProducto) {
-        this.idProducto = idProducto;
-    }
+    private Boolean activo;
 
-    public String getDescripcion() {
-        return descripcion;
-    }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public Set<Foto> getFotos() {
-        return fotos;
-    }
-
-    public void setFotos(Set<Foto> fotos) {
-        this.fotos = fotos;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public BigDecimal getPrecio() {
-        return precio;
-    }
-
-    public void setPrecio(BigDecimal precio) {
-        this.precio = precio;
-    }
 }
+

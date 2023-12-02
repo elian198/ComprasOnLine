@@ -20,7 +20,12 @@ public class Empresa {
     private Rubro rubro;
 
     @OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL)
+    private Set<Producto> productos = new HashSet<>();
+
+    @OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL)
     private Set<Socursal> socursales = new HashSet<>();
+
+
 
     public Empresa() {}
 
@@ -64,6 +69,14 @@ public class Empresa {
         this.socursales = socursales;
     }
 
+    public Set<Producto> getProductos() {
+        return productos;
+    }
+
+    public void setProductos(Set<Producto> productos) {
+        this.productos = productos;
+    }
+
     @Override
     public String toString() {
         return "Empresa{" +
@@ -71,6 +84,7 @@ public class Empresa {
                 ", nombre='" + nombre + '\'' +
                 ", razonSocial='" + razonSocial + '\'' +
                 ", rubro=" + rubro +
+                ", productos=" + productos +
                 ", socursales=" + socursales +
                 '}';
     }

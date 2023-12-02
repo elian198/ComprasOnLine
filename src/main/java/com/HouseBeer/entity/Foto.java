@@ -12,7 +12,7 @@ public class Foto implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long idFoto;
+    private Long id;
 
     @Column(name = "NOMBRE_ARCHIVO")
     private String nombreArchivo;
@@ -22,12 +22,13 @@ public class Foto implements Serializable {
 
     public Foto() {}
 
-    public Long getIdFoto() {
-        return idFoto;
+
+    public Long getId() {
+        return id;
     }
 
-    public void setIdFoto(Long idFoto) {
-        this.idFoto = idFoto;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNombreArchivo() {
@@ -46,5 +47,12 @@ public class Foto implements Serializable {
         this.producto = producto;
     }
 
-    
+    @Override
+    public String toString() {
+        return "Foto{" +
+                "id =" + id +
+                ", nombreArchivo='" + nombreArchivo + '\'' +
+                ", producto=" + producto +
+                '}';
+    }
 }
