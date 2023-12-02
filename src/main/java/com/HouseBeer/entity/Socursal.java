@@ -15,9 +15,10 @@ public class Socursal {
     private Integer telefono;
     private LocalDateTime fechaAlta;
 
-
     @ManyToOne()
     private Empresa empresa;
+   @OneToOne()
+   private  Zona zona;
 
     public Socursal() { }
 

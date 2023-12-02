@@ -16,4 +16,35 @@ public class Foto implements Serializable {
 
     @Column(name = "NOMBRE_ARCHIVO")
     private String nombreArchivo;
+
+    @ManyToOne()
+    private Producto producto;
+
+    public Foto() {}
+
+    public Long getIdFoto() {
+        return idFoto;
+    }
+
+    public void setIdFoto(Long idFoto) {
+        this.idFoto = idFoto;
+    }
+
+    public String getNombreArchivo() {
+        return nombreArchivo;
+    }
+
+    public void setNombreArchivo(String nombreArchivo) {
+        this.nombreArchivo = nombreArchivo;
+    }
+
+    public Producto getProducto() {
+        return producto;
+    }
+
+    public void setProducto(Producto producto) {
+        this.producto = producto;
+    }
+
+    
 }
