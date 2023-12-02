@@ -5,6 +5,8 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "cliente")
@@ -36,6 +38,9 @@ public class Cliente {
 
     @Column(name = "FECHA_CREACION")
     private LocalDateTime fechaCreacion;
+
+    @OneToMany(mappedBy = "cliente")
+    private Set<Pedido> pedidos = new HashSet<>();
 
 
 }
