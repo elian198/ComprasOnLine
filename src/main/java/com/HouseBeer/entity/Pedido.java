@@ -1,15 +1,12 @@
 package com.HouseBeer.entity;
 
-import lombok.Builder;
-import lombok.Data;
-
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
-@Table(name = "factura")
+@Table(name = "pedido")
 @Entity
 public class Pedido {
 
@@ -20,16 +17,16 @@ public class Pedido {
     @Column(name = "FECHA_CREACION")
     private LocalDateTime fechaCreacion;
 
-
-    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne()
     private Cliente cliente;
 
-    @OneToMany(mappedBy = "idProducto")
-    @Column(name = "ID_PRODUCTO")
-    private Set<Producto> productos = new HashSet<>();
+    @OneToMany(mappedBy = "pedido")
+    private Set<Orden> orden = new HashSet<>();
 
     @Column(name = "IMPORTE_TOTAL")
     private BigDecimal importeTotal;
+
+    private Boolean estado;
 
     public Pedido() {}
 
@@ -64,12 +61,21 @@ public class Pedido {
         this.cliente = cliente;
     }
 
-    public Set<Producto> getProductos() {
-        return productos;
+
+    public Set<Orden> getOrden() {
+        return orden;
     }
 
-    public void setProductos(Set<Producto> productos) {
-        this.productos = productos;
+    public void setOrden(Set<Orden> orden) {
+        this.orden = orden;
+    }
+
+    public Boolean getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Boolean estado) {
+        this.estado = estado;
     }
 
     public BigDecimal getImporteTotal() {
@@ -86,8 +92,9 @@ public class Pedido {
                 "idPedido=" + idPedido +
                 ", fechaCreacion=" + fechaCreacion +
                 ", cliente=" + cliente +
-                ", productos=" + productos +
+                ", orden=" + orden +
                 ", importeTotal=" + importeTotal +
+                ", estado=" + estado +
                 '}';
     }
 }
