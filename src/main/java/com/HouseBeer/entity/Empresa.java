@@ -1,6 +1,7 @@
 package com.HouseBeer.entity;
 
 import com.HouseBeer.entity.enums.Rubro;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -19,10 +20,12 @@ public class Empresa {
     @Enumerated(EnumType.STRING)
     private Rubro rubro;
 
-    @OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL)
+    @JsonIgnore
+    @OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL, fetch=FetchType.LAZY)
     private Set<Producto> productos = new HashSet<>();
 
-    @OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL)
+    @JsonIgnore
+    @OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL, fetch=FetchType.LAZY)
     private Set<Socursal> socursales = new HashSet<>();
 
 
