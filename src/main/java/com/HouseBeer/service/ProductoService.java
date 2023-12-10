@@ -21,6 +21,7 @@ public class ProductoService {
     }
 
     public void saveProducto(Producto producto){
+        System.out.println("Empresa: " + producto.getEmpresa());
         productoRepository.save(producto);
     }
 

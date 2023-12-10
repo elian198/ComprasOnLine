@@ -22,6 +22,7 @@ public class ProductoController {
 
    @PostMapping("/producto")
    public ResponseEntity<Void> crearProducto(@RequestBody Producto producto){
+       System.out.println("POST producto");
        productoService.saveProducto(producto);
        return  ResponseEntity.ok().build();
    }

@@ -1,5 +1,6 @@
 package com.HouseBeer.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -17,6 +18,7 @@ public class Foto implements Serializable {
     @Column(name = "NOMBRE_ARCHIVO")
     private String nombreArchivo;
 
+    @JsonBackReference
     @ManyToOne()
     private Producto producto;
 

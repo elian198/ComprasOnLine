@@ -1,7 +1,12 @@
 package com.HouseBeer.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "socursal")
@@ -15,10 +20,15 @@ public class Socursal {
     private Integer telefono;
     private LocalDateTime fechaAlta;
 
+    @JsonBackReference
     @ManyToOne()
     private Empresa empresa;
-   @OneToOne()
-   private  Zona zona;
+    @JsonIgnore
+    @OneToOne()
+    private Zona zona;
+
+    @OneToMany(mappedBy = "socursal")
+    private Set<Empleado> empleados = new HashSet<>();
 
     public Socursal() { }
 
@@ -70,6 +80,22 @@ public class Socursal {
         this.empresa = empresa;
     }
 
+    public Zona getZona() {
+        return zona;
+    }
+
+    public void setZona(Zona zona) {
+        this.zona = zona;
+    }
+
+    public Set<Empleado> getEmpleados() {
+        return empleados;
+    }
+
+    public void setEmpleados(Set<Empleado> empleados) {
+        this.empleados = empleados;
+    }
+
     @Override
     public String toString() {
         return "Socursal{" +
@@ -78,6 +104,8 @@ public class Socursal {
                 ", telefono=" + telefono +
                 ", fechaAlta=" + fechaAlta +
                 ", empresa=" + empresa +
+                ", zona=" + zona +
+                ", empleados=" + empleados +
                 '}';
     }
 }
