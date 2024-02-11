@@ -20,6 +20,8 @@ public class Socursal {
     private Integer telefono;
     private LocalDateTime fechaAlta;
 
+    private String provincia;
+
     @JsonBackReference
     @ManyToOne()
     private Empresa empresa;
@@ -32,12 +34,13 @@ public class Socursal {
 
     public Socursal() { }
 
-    public Socursal(Long id, String direccion, Integer telefono, LocalDateTime fechaAlta, Empresa empresa) {
+    public Socursal(Long id, String direccion, Integer telefono, LocalDateTime fechaAlta, Empresa empresa, String provincia) {
         this.id = id;
         this.direccion = direccion;
         this.telefono = telefono;
         this.fechaAlta = fechaAlta;
         this.empresa = empresa;
+        this.provincia = provincia;
     }
 
     public Long getId() {
@@ -92,6 +95,14 @@ public class Socursal {
         return empleados;
     }
 
+    public String getProvincia() {
+        return provincia;
+    }
+
+    public void setProvincia(String provincia) {
+        this.provincia = provincia;
+    }
+
     public void setEmpleados(Set<Empleado> empleados) {
         this.empleados = empleados;
     }
@@ -103,6 +114,7 @@ public class Socursal {
                 ", direccion='" + direccion + '\'' +
                 ", telefono=" + telefono +
                 ", fechaAlta=" + fechaAlta +
+                ", provincia='" + provincia + '\'' +
                 ", empresa=" + empresa +
                 ", zona=" + zona +
                 ", empleados=" + empleados +

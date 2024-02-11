@@ -1,11 +1,17 @@
 package com.HouseBeer.controller;
 
 import com.HouseBeer.entity.Producto;
+import com.HouseBeer.repository.ProductoRepository;
+import com.HouseBeer.repository.ProductoRepositoryImpl;
 import com.HouseBeer.service.ProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.List;
 
@@ -15,9 +21,19 @@ public class ProductoController {
     @Autowired
     private ProductoService productoService;
 
+    @Autowired
+    private ProductoRepositoryImpl productoRepository;
+
    @GetMapping("/producto")
-   public ResponseEntity<List<Producto>> findAllProductos() {
-       return  ResponseEntity.ok(productoService.findAllProductos());
+   public ResponseEntity<List<Producto>> findAllProductos(
+           Pageable pageable,
+           @RequestParam String where
+   ){
+
+       List<Producto> resultado = productoRepository.getByCambio(pageable, where, true);
+       Page<Producto> response = new PageImpl<>(resultado, pageable, productoRepository.countFileProductos(where));
+       HttpHeaders headers = new HttpHeaders();
+       return ResponseEntity.ok().headers(headers).body(response.getContent());
    }
 
    @PostMapping("/producto")
@@ -38,4 +54,9 @@ public class ProductoController {
 
        return  ResponseEntity.ok().build();
    }
+
+    @GetMapping("/producto/distinctNombre")
+    public ResponseEntity<List<String>> findAllDistinctNombre(){
+        return  ResponseEntity.ok(productoService.findAllDistinctNombre());
+    }
 }

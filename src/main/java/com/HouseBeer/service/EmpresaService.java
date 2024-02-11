@@ -2,10 +2,12 @@ package com.HouseBeer.service;
 
 import com.HouseBeer.entity.Empresa;
 import com.HouseBeer.entity.Socursal;
+import com.HouseBeer.excepciones.DuplicateNameException;
 import com.HouseBeer.repository.EmpresaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -17,8 +19,19 @@ public class EmpresaService {
     public List<Empresa> findAllEmpresa(){
         return empresaRepository.findAllEmpresa();
     }
-    public void saveEmpresa(Empresa empresa){
-        empresaRepository.save(empresa);
+    public String saveEmpresa(Empresa empresa) throws DuplicateNameException {
+        String errores = "";
+        if(empresaRepository.existNameEmpresa(empresa.getNombre()).bitCount() == 1){
+           errores += "El nombre " + empresa.getNombre() + " ya existe!!!/n";
+        }
+        if(empresaRepository.findByRazonSocial(empresa.getRazonSocial()) != null){
+          errores  += "La razon Social " + empresa.getRazonSocial() + " ya existe !!,";
+        }
+       else{
+            empresaRepository.save(empresa);
+            return "OK";
+        }
+       return  errores;
     }
 
     public void deleteEmpresa(Long id){

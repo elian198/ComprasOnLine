@@ -1,6 +1,7 @@
 package com.HouseBeer.controller;
 
 import com.HouseBeer.entity.Empresa;
+import com.HouseBeer.excepciones.DuplicateNameException;
 import com.HouseBeer.service.EmpresaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
@@ -22,10 +23,8 @@ public class EmpresaController {
         return ResponseEntity.ok(empresaService.findAllEmpresa());
     }
     @PostMapping("api/empresa")
-    public ResponseEntity<Void> saveEmpresa(@RequestBody Empresa empresa){
-        System.out.println("POST empresa");
-        empresaService.saveEmpresa(empresa);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<String> saveEmpresa(@RequestBody Empresa empresa) throws DuplicateNameException {
+        return ResponseEntity.ok( empresaService.saveEmpresa(empresa));
     }
 
     @GetMapping("api/empresa/findByName")
@@ -34,7 +33,8 @@ public class EmpresaController {
     }
 
     @DeleteMapping("api/empresa/{id}")
-    public ResponseEntity<Void> deleteEmpresa(@Param("id") Long id){
+    public ResponseEntity<Void> deleteEmpresa(@PathVariable Long id){
+        System.out.println("ID: " + id);
         empresaService.deleteEmpresa(id);
         return ResponseEntity.ok().build();
     }
