@@ -4,6 +4,7 @@ import com.HouseBeer.entity.Foto;
 import com.HouseBeer.entity.Producto;
 import com.HouseBeer.repository.ProductoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,11 +18,10 @@ public class ProductoService {
     private ProductoRepository productoRepository;
 
     public List<Producto> findAllProductos(){
-      return productoRepository.findAll();
+      return productoRepository.findAll(Sort.by("nombre"));
     }
 
     public void saveProducto(Producto producto){
-        System.out.println("Empresa: " + producto.getEmpresa());
         productoRepository.save(producto);
     }
 
@@ -34,4 +34,13 @@ public class ProductoService {
       producto.get().getFotos().addAll(foto);
       productoRepository.save(producto.get());
     }
+
+    public List<Producto> findByName(String name){
+        return  productoRepository.findByName(name);
+    }
+
+    public  List<String> findAllDistinctNombre(){
+        return  productoRepository.findAlldistinctNombre();
+    }
+
 }

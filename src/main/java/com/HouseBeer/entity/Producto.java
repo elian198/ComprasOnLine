@@ -33,7 +33,7 @@ public class Producto {
     @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL)
     private Set<Foto> fotos = new HashSet<>();
 
-    @JsonBackReference
+
     @ManyToOne()
     private Empresa empresa ;
 

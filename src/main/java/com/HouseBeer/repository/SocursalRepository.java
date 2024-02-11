@@ -13,7 +13,7 @@ public interface SocursalRepository extends JpaRepository<Socursal, Long> {
     @Query(value = "SELECT * FROM socursal WHERE nombre = :name", nativeQuery = true)
     public Socursal findByName(@Param("name") String name);
 
-    @Query(value = "SELECT * FROM socursal ORDER BY nombre", nativeQuery = true)
+    @Query(value = "SELECT * FROM socursal ORDER BY provincia", nativeQuery = true)
     public List<Socursal> findByAllSort();
 
     @Query(value = "SELECT * FROM socursal WHERE empresa_id = :id", nativeQuery = true)

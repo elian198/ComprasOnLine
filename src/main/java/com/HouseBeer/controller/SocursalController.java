@@ -10,24 +10,26 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/socursal")
 public class SocursalController {
 
     @Autowired
     private SocursalService socursalService;
 
-    @GetMapping("/")
+    @GetMapping("/socursal")
     public ResponseEntity<List<Socursal>> findAll(){
+
         return ResponseEntity.ok(socursalService.findAllSort());
     }
 
-    @PostMapping("/")
+    @PostMapping("/socursal")
     public ResponseEntity<Void> saveSocursal(@RequestBody Socursal socursal){
+        System.out.println("POST socursal");
+        System.out.println("Socursal: " + socursal);
         socursalService.saveSocursal(socursal);
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/findByEmpresa/{id}")
+    @GetMapping("/socursal/findByEmpresa/{id}")
     public ResponseEntity<Socursal> findByName(@Param("id") Long id){
         return ResponseEntity.ok(socursalService.findByEmpresa(id));
     }
