@@ -80,6 +80,41 @@ public class Empresa {
         this.productos = productos;
     }
 
+    public static class Builder{
+        private  Empresa empresa;
+
+        public Builder( ) {
+        this.empresa = new Empresa();
+        }
+            public Builder id(Long id){
+            this.empresa.id = id;
+            return  this;
+           }
+            public Builder nombre(String nombre){
+             this.empresa.nombre = nombre;
+             return  this;
+            }
+            public Builder razonSocial(String razonSocial){
+            this.empresa.razonSocial = razonSocial;
+            return  this;
+            }
+            public Builder rubro(Rubro rubro){
+            this.empresa.rubro = rubro;
+            return  this;
+           }
+            public Builder productos(Set<Producto> productos){
+            this.empresa.productos = productos;
+            return  this;
+           }
+            public Builder socursales(Set<Socursal> socursales){
+            this.empresa.socursales = socursales;
+            return  this;
+           }
+
+           public Empresa builder(){
+            return  this.empresa;
+           }
+    }
     @Override
     public String toString() {
         return "Empresa{" +
