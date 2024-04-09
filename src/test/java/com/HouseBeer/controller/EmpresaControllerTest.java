@@ -66,7 +66,7 @@ class EmpresaControllerTest {
                 .rubro(Rubro.COMERCIO)
                 .builder();
 
-        Mockito.when(empresaService.saveEmpresa(empresa1)).thenReturn(String.valueOf(empresa));
+        Mockito.when(empresaService.saveEmpresa(empresa1)).thenReturn((empresa));
         mockMvc.perform(post("api/empresa").contentType(MediaType.APPLICATION_JSON)
                 .content("{\n" +
                         "   \"nombre\":\"ferreteria\",\n" +

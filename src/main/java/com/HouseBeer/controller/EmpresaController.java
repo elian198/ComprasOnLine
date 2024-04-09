@@ -23,7 +23,7 @@ public class EmpresaController {
         return ResponseEntity.ok(empresaService.findAllEmpresa());
     }
     @PostMapping("api/empresa")
-    public ResponseEntity<String> saveEmpresa(@RequestBody Empresa empresa) throws DuplicateNameException {
+    public ResponseEntity<Empresa> saveEmpresa(@RequestBody Empresa empresa) throws DuplicateNameException {
         return ResponseEntity.ok( empresaService.saveEmpresa(empresa));
     }
 

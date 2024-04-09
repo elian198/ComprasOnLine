@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -12,7 +13,7 @@ import java.util.Set;
 public class Empresa {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String nombre;
@@ -125,5 +126,17 @@ public class Empresa {
                 ", productos=" + productos +
                 ", socursales=" + socursales +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Empresa empresa)) return false;
+        return Objects.equals(getId(), empresa.getId()) && Objects.equals(getNombre(), empresa.getNombre()) && Objects.equals(getRazonSocial(), empresa.getRazonSocial()) && getRubro() == empresa.getRubro() && Objects.equals(getProductos(), empresa.getProductos()) && Objects.equals(getSocursales(), empresa.getSocursales());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getNombre(), getRazonSocial(), getRubro(), getProductos(), getSocursales());
     }
 }
