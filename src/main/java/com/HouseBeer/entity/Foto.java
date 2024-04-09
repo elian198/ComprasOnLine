@@ -10,7 +10,6 @@ import java.io.Serializable;
 @Entity
 @Data
 public class Foto implements Serializable {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
