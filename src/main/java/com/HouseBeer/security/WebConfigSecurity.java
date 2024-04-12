@@ -4,6 +4,7 @@ import com.HouseBeer.security.jwt.JwtAuthEntryPoint;
 import com.HouseBeer.security.jwt.JwtRequestFilter;
 import com.HouseBeer.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -20,13 +21,13 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+
 import java.util.List;
 
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebConfigSecurity extends WebSecurityConfigurerAdapter {
-
 
     @Autowired
     private UsuarioService userService;
@@ -87,6 +88,8 @@ public class WebConfigSecurity extends WebSecurityConfigurerAdapter {
         source.registerCorsConfiguration("/**", configuration);
         return source;
     }
+
+
 }
 
 

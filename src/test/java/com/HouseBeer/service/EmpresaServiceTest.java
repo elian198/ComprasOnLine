@@ -58,7 +58,7 @@ class EmpresaServiceTest {
         when(empresaRepository.findByRazonSocial("Matilde S.R")).thenReturn(Optional.ofNullable(Datos.EMPRESA));
         empresaService.saveEmpresa(Datos.EMPRESA2);
         verify(empresaRepository).findByName("Havanna");
-        verify(empresaRepository.findByRazonSocial("Havanna S.R"));
+        verify(empresaRepository.findByRazonSocial("Havanna S.R"), times(10));
 
         Empresa respuesta = empresaService.saveEmpresa(Datos.EMPRESA2);
         Exception exception = assertThrows(DuplicateNameException.class, () -> {

@@ -1,10 +1,12 @@
 package com.HouseBeer.controller;
 
+import com.HouseBeer.datos.Datos;
 import com.HouseBeer.entity.Empresa;
 import com.HouseBeer.entity.Producto;
 import com.HouseBeer.entity.Socursal;
 import com.HouseBeer.entity.enums.Rubro;
 import com.HouseBeer.excepciones.DuplicateNameException;
+import com.HouseBeer.repository.EmpresaRepository;
 import com.HouseBeer.service.EmpresaService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,8 +23,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(EmpresaController.class)
 class EmpresaControllerTest {
@@ -33,47 +36,25 @@ class EmpresaControllerTest {
     @MockBean
     private EmpresaService empresaService;
 
-    Empresa empresa;
-    Set<Socursal> socursals = new HashSet<>();
-    Set<Producto> productos = new HashSet<>();
-    @BeforeEach
-    void setUp() {
 
-        Socursal socursal = new Socursal();
-        socursal.setEmpresa(empresa);
-        socursal.setDireccion("brazil 123");
-        socursals.add(socursal);
-
-        Producto producto = new Producto();
-        producto.setEmpresa(empresa);
-        producto.setActivo(true);
-        producto.setNombre("martillo");
-        producto.setDescripcion("marillo de metal");
-        producto.setPrecio(new BigDecimal(2300));
-        productos.add(producto);
-
-        empresa = new Empresa.Builder()
-                .id(2L)
-                .nombre("ferreteria")
-                .razonSocial("Ferre S.R.L")
-                .builder();
-    }
     @Test
-    public void save() throws DuplicateNameException, Exception {
-        Empresa empresa1 = new Empresa.Builder()
-                .nombre("ferreteria")
-                .razonSocial("Ferre S.R.L")
-                .rubro(Rubro.COMERCIO)
-                .builder();
+    void testFindAll() throws Exception {
+        when(empresaService.findAllEmpresa()).thenReturn(Datos.EMPRESAS);
+        mockMvc.perform(get("/api/empresa").contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.nombre").value("Matilde"));
+    }
 
-        Mockito.when(empresaService.saveEmpresa(empresa1)).thenReturn((empresa));
-        mockMvc.perform(post("api/empresa").contentType(MediaType.APPLICATION_JSON)
-                .content("{\n" +
-                        "   \"nombre\":\"ferreteria\",\n" +
-                        "   \"razonSocial\":\"Ferre S.R.L\",\n" +
-                        "   \"rubro\":\"COMERCIO\",\n"
+    @Test
+    void testFindByName() throws Exception {
+        when(empresaService.findByName("Matilde")).thenReturn(Datos.EMPRESA);
+        mockMvc.perform(get("/api/empresa/findByName")
+                        .param("name", "Matilde")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON));
 
-                )).andExpect(status().isOk());
     }
 
 }

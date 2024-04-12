@@ -29,9 +29,16 @@ public class Empresa {
     @OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL, fetch=FetchType.LAZY)
     private Set<Socursal> socursales = new HashSet<>();
 
+    public Empresa() { }
 
-
-    public Empresa() {}
+    public Empresa(Long id, String nombre, String razonSocial, Rubro rubro, Set<Producto> productos, Set<Socursal> socursales) {
+        this.id = id;
+        this.nombre = nombre;
+        this.razonSocial = razonSocial;
+        this.rubro = rubro;
+        this.productos = productos;
+        this.socursales = socursales;
+    }
 
     public Long getId() {
         return id;
