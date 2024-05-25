@@ -1,45 +1,46 @@
 package com.HouseBeer.controller;
 
+import com.HouseBeer.HouseBeerApplication;
 import com.HouseBeer.datos.Datos;
-import com.HouseBeer.entity.Empresa;
-import com.HouseBeer.entity.Producto;
-import com.HouseBeer.entity.Socursal;
-import com.HouseBeer.entity.enums.Rubro;
-import com.HouseBeer.excepciones.DuplicateNameException;
 import com.HouseBeer.repository.EmpresaRepository;
 import com.HouseBeer.service.EmpresaService;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.Before;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
+import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
 
-import java.io.IOException;
-import java.math.BigDecimal;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+
 @WebMvcTest(EmpresaController.class)
+@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 class EmpresaControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
-    @MockBean
+    @Autowired
     private EmpresaService empresaService;
-
-
     @Test
     void testFindAll() throws Exception {
-        when(empresaService.findAllEmpresa()).thenReturn(Datos.EMPRESAS);
         mockMvc.perform(get("/api/empresa").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -48,7 +49,7 @@ class EmpresaControllerTest {
 
     @Test
     void testFindByName() throws Exception {
-        when(empresaService.findByName("Matilde")).thenReturn(Datos.EMPRESA);
+        when(this.empresaService.findByName("Matilde")).thenReturn(Datos.EMPRESA);
         mockMvc.perform(get("/api/empresa/findByName")
                         .param("name", "Matilde")
                         .contentType(MediaType.APPLICATION_JSON))

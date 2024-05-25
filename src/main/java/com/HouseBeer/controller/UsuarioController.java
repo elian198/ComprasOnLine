@@ -35,8 +35,6 @@ public class UsuarioController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginPayload loginPayload){
-
-        System.out.println("POST login");
         final Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         loginPayload.getName() ,
