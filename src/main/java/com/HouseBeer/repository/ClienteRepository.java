@@ -1,12 +1,9 @@
 package com.HouseBeer.repository;
 
 import com.HouseBeer.entity.Cliente;
-import com.HouseBeer.entity.Producto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-
-import java.math.BigDecimal;
 
 @Repository
 public interface ClienteRepository extends JpaRepository<Cliente,Long> {

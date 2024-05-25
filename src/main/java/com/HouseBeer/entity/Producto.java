@@ -41,6 +41,13 @@ public class Producto {
 
     public Producto() {}
 
+    public Producto(String nombre, String descripcion, BigDecimal precio,  Boolean activo) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.precio = precio;
+        this.activo = activo;
+    }
+
     public Long getIdProducto() {
         return idProducto;
     }
