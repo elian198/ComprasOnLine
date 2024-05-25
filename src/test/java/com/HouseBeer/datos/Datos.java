@@ -6,13 +6,14 @@ import com.HouseBeer.entity.Socursal;
 import com.HouseBeer.entity.enums.Rubro;
 
 import java.lang.reflect.Array;
+import java.math.BigDecimal;
 import java.util.*;
 
 public class Datos {
     public final static List<Empresa> EMPRESAS =  Arrays.asList(
-           new Empresa.Builder().nombre("Matilde").id(3L).rubro(Rubro.GASTRONOMICO).razonSocial("Matilde S.R")
+           new Empresa.Builder().nombre("Matilde").rubro(Rubro.GASTRONOMICO).razonSocial("Matilde S.R")
            .builder(),
-            new Empresa.Builder().nombre("Havanna").id(1L).rubro(Rubro.GASTRONOMICO).razonSocial("Havanna S.R")
+            new Empresa.Builder().nombre("Havanna").rubro(Rubro.GASTRONOMICO).razonSocial("Havanna S.R")
             .builder()
     );
 
@@ -34,4 +35,8 @@ public class Datos {
             .rubro(Rubro.COMERCIO)
             .razonSocial("YPF S.R")
             .builder();
+
+    public final static List<Producto> PRODUCTOS = Arrays.asList(
+            new Producto("pepa", "peap de membrillo", new BigDecimal(2000L), true
+            ));
 }
