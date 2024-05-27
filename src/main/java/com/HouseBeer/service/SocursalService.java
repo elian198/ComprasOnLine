@@ -21,11 +21,11 @@ public class SocursalService {
         return  socursalRepository.findByAllSort();
     }
 
-    public Socursal findByEmpresa(Long id){
+    public List<Socursal> findByEmpresa(Long id){
         return socursalRepository.findByEmpresa(id);
     }
 
-    public Socursal findByName(String name){
-        return socursalRepository.findByName(name);
+    public Socursal findByDireccion(String name){
+        return socursalRepository.findByDireccion(name);
     }
 }
