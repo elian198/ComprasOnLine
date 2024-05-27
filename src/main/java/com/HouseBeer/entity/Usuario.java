@@ -9,11 +9,10 @@ import java.util.Set;
 
 @Table(name = "usuario")
 @Entity
-@Data
 public class Usuario {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idUsuario;
 
     @Column(name = "nombre")

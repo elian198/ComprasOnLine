@@ -9,7 +9,6 @@ import java.util.Set;
 
 @Table(name = "cierreCaja")
 @Entity
-@Data
 public class CierreCaja {
 
     @Id
@@ -27,4 +26,37 @@ public class CierreCaja {
     @JoinColumn(name="idUsuario")
     private Usuario usuario;
 
+    public CierreCaja() {}
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Set<Pedido> getPedidos() {
+        return pedidos;
+    }
+
+    public void setPedidos(Set<Pedido> pedidos) {
+        this.pedidos = pedidos;
+    }
+
+    public BigDecimal getTotal() {
+        return total;
+    }
+
+    public void setTotal(BigDecimal total) {
+        this.total = total;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
 }

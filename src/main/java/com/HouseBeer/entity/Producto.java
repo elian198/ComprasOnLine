@@ -17,7 +17,7 @@ import java.util.Set;
 public class Producto {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idProducto;
 
     @Column(name = "NOMBRE")
@@ -40,6 +40,13 @@ public class Producto {
     private Boolean activo;
 
     public Producto() {}
+
+    public Producto(String nombre, String descripcion, BigDecimal precio,  Boolean activo) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.precio = precio;
+        this.activo = activo;
+    }
 
     public Long getIdProducto() {
         return idProducto;

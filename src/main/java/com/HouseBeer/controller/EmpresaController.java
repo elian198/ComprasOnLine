@@ -4,9 +4,7 @@ import com.HouseBeer.entity.Empresa;
 import com.HouseBeer.excepciones.DuplicateNameException;
 import com.HouseBeer.service.EmpresaService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.converter.json.GsonBuilderUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,11 +17,10 @@ public class EmpresaController {
 
     @GetMapping("api/empresa")
     public ResponseEntity<List<Empresa>> findAll(){
-        System.out.println("Get Empresas!!");
         return ResponseEntity.ok(empresaService.findAllEmpresa());
     }
     @PostMapping("api/empresa")
-    public ResponseEntity<String> saveEmpresa(@RequestBody Empresa empresa) throws DuplicateNameException {
+    public ResponseEntity<Empresa> saveEmpresa(@RequestBody Empresa empresa) throws DuplicateNameException {
         return ResponseEntity.ok( empresaService.saveEmpresa(empresa));
     }
 

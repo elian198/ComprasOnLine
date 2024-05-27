@@ -1,7 +1,6 @@
 package com.HouseBeer.service;
 
 import com.HouseBeer.entity.Cliente;
-import com.HouseBeer.entity.Producto;
 import com.HouseBeer.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,7 +11,7 @@ import java.util.List;
 public class ClienteService {
 
     @Autowired
-    private ClienteRepository clienteRepository;
+    ClienteRepository clienteRepository;
 
     public List<Cliente> findAllCLients(){
         return clienteRepository.findAll();

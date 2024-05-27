@@ -7,8 +7,9 @@ import com.HouseBeer.repository.EmpresaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EmpresaService {
@@ -19,31 +20,27 @@ public class EmpresaService {
     public List<Empresa> findAllEmpresa(){
         return empresaRepository.findAllEmpresa();
     }
-    public String saveEmpresa(Empresa empresa) throws DuplicateNameException {
-        String errores = "";
-        if(empresaRepository.existNameEmpresa(empresa.getNombre()).bitCount() == 1){
-           errores += "El nombre " + empresa.getNombre() + " ya existe!!!/n";
-        }
-        if(empresaRepository.findByRazonSocial(empresa.getRazonSocial()) != null){
-          errores  += "La razon Social " + empresa.getRazonSocial() + " ya existe !!,";
-        }
-       else{
-            empresaRepository.save(empresa);
-            return "OK";
-        }
-       return  errores;
+    public Empresa saveEmpresa(Empresa empresa) throws DuplicateNameException {
+       if(empresaRepository.findByName(empresa.getNombre()).isPresent() ||
+          empresaRepository.findByRazonSocial(empresa.getRazonSocial()).isPresent())
+          throw new DuplicateNameException("El nombre ya existe");
+
+       return empresaRepository.save(empresa);
     }
 
-    public void deleteEmpresa(Long id){
-        empresaRepository.deleteById(id);
+    public boolean deleteEmpresa(Long id){
+        if(id == null) throw  new IllegalArgumentException("No puede ser Null");
+      return (empresaRepository.deleteByIdEmpresa(id));
     }
 
     public Empresa findById(Long id){
-        return empresaRepository.findById(id).get();
+        Optional<Empresa> empresa = empresaRepository.findById(id);
+        return empresa.orElseThrow(IllegalArgumentException::new);
     }
 
     public Empresa findByName(String name){
-        return empresaRepository.findByName(name);
+        if(name == null){throw new IllegalArgumentException("No se puede enviar Null!!");}
+        return empresaRepository.findByName("Matilde").orElse(null);
     }
 
     public void addSocursal(Socursal socursal, Long id){
