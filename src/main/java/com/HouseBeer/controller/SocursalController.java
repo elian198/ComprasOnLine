@@ -30,7 +30,7 @@ public class SocursalController {
     }
 
     @GetMapping("/socursal/findByEmpresa/{id}")
-    public ResponseEntity<Socursal> findByName(@Param("id") Long id){
+    public ResponseEntity<List<Socursal>> findByName(@Param("id") Long id){
         return ResponseEntity.ok(socursalService.findByEmpresa(id));
     }
 }
