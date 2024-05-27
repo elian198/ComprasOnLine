@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class Zona {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String lugar;
