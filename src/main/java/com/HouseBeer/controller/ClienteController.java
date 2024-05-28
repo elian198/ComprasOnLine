@@ -3,6 +3,7 @@ package com.HouseBeer.controller;
 import com.HouseBeer.entity.Cliente;
 import com.HouseBeer.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,13 +32,15 @@ public class ClienteController {
     }
 
     @PostMapping("/cliente/findByEmail")
-    public ResponseEntity<Cliente> findByEmail(@PathVariable String email){
-        return ResponseEntity.ok(clienteService.findByEmail(email));
+    @ResponseStatus(code = HttpStatus.OK)
+    public List<Cliente> findByEmail(@PathVariable String email){
+        return clienteService.findByEmail(email);
     }
 
     @PostMapping("/cliente/findByName")
-    public ResponseEntity<Cliente> findByName(@PathVariable String name){
-        return ResponseEntity.ok(clienteService.findByName(name));
+    @ResponseStatus(code = HttpStatus.OK)
+    public List<Cliente> findByName(@PathVariable String name){
+        return clienteService.findByName(name);
     }
 
     @PostMapping("/cliente/findByPhone")

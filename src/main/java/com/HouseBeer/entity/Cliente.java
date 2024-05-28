@@ -22,16 +22,16 @@ public class Cliente {
     @Column(name = "apellido")
     private String apellido;
 
-    @Column(name = "EMAIL")
+    @Column(name = "EMAIL", unique = true)
     private String email;
 
-    @Column(name = "DIRECCION")
+    @Column(name = "DIRECCION", unique = true)
     private String direccion;
 
     @Column(name = "CODIGO_POSTAL")
     private Integer codigoPostal;
 
-    @Column(name = "TELEFONO")
+    @Column(name = "TELEFONO", unique = true)
     private Integer telefono;
 
     @Column(name = "FECHA_CREACION")

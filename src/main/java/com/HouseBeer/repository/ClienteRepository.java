@@ -3,20 +3,23 @@ package com.HouseBeer.repository;
 import com.HouseBeer.entity.Cliente;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public interface ClienteRepository extends JpaRepository<Cliente,Long> {
 
     @Query(value =
-    "SELECT * FROM cliente c " +
-    "WHERE c.nombre LIKE ?1", nativeQuery = true)
-    public Cliente findByName(String name);
+    "SELECT * FROM cliente  " +
+    "WHERE nombre LIKE :nombre%", nativeQuery = true)
+    public List<Cliente> findByName(@Param("nombre") String name);
 
     @Query(value =
     "SELECT * FROM cliente c " +
-    "WHERE c.email LIKE ?1", nativeQuery = true)
-    public Cliente findByEmail(String email);
+    "WHERE c.email LIKE ?1%", nativeQuery = true)
+    List<Cliente> findByEmail(String email);
 
     @Query(value =
     "SELECT * FROM cliente c " +

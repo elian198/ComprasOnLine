@@ -25,7 +25,7 @@ public class ClienteService {
         clienteRepository.deleteById(id);
     }
 
-    public Cliente findByEmail(String email){
+    public List<Cliente> findByEmail(String email){
         return  clienteRepository.findByEmail(email);
     }
 
@@ -33,7 +33,7 @@ public class ClienteService {
         return clienteRepository.findByPhone(phone);
     }
 
-    public Cliente findByName(String name){
+    public List<Cliente> findByName(String name){
         return clienteRepository.findByName(name);
     }
 

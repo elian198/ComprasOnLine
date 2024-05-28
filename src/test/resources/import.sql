@@ -14,7 +14,9 @@ INSERT INTO usuario (apellido, email, nombre, password) VALUES ('Garcia', 'Maria
 
 
 
-INSERT INTO cliente (apellido, codigo_postal, direccion, email, fecha_creacion, nombre, telefono) VALUES ('Chiodi', '1860', 'Mariano Moreno', 'Alan@hotmail.com', '2024-05-27', 'Alan', '1156557788'  )
+INSERT INTO cliente (apellido, codigo_postal, direccion, email, fecha_creacion, nombre, telefono) VALUES ('Chiodi', '1860', 'Mariano Moreno', 'Alan@hotmail.com', '2024-05-27', 'alan', '1156557788'  )
+INSERT INTO cliente (apellido, codigo_postal, direccion, email, fecha_creacion, nombre, telefono) VALUES ('Perez', '1860', 'La paz', 'Alan@gmail.com', '2024-05-27', 'alan', '1156557733'  )
+
 
 INSERT INTO pedido (estado, fecha_creacion, importe_total, cliente_id_cliente) VALUES (1, '2024-05-26',3000.00, 1 );
 
